@@ -21,7 +21,7 @@
     <!-- nav bar  -->
     <div class="container-fluid p-0">
         <!-- first child  -->
-        <nav class="navbar navbar-expand-lg bg-secondary">
+        <nav class="navbar navbar-expand-lg bg-success">
             <div class="container-fluid">
                 <img src="./assets/logo.webp" alt="logo" class="logo">
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -61,7 +61,7 @@
 
 
         <!-- second child  -->
-        <nav class="navbar navbar-expand-lg navbar-dark bg-secondary">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-success">
             <ul class="navbar-nav me-auto  ">
                 <li class="nav-item">
                     <a href="" class="nav-link">Welcome Guest</a>
