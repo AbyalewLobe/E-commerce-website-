@@ -1,3 +1,8 @@
+<!-- connect file  -->
+<?php 
+ include("includes/connect.php");
+ ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -176,31 +181,23 @@
                             <h4>Delivery</h4>
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a href="" class="nav-link text-white">
-                            Brand1
+
+                    <?php
+                    $select_brand = "Select * from brands";
+                    $result_brands = mysqli_query($con, $select_brand);
+                    // $row_data = mysqli_fetch_assoc($result_brands);
+                    // echo $row_data['brand_title'];
+                    while($row_data = mysqli_fetch_assoc($result_brands)){
+                        $brand_title = $row_data['brand_title'];
+                        $brand_id = $row_data['brand_id'];
+                        echo "<li class='nav-item'>
+                        <a href='index.php?brand=$brand_id' class='nav-link text-white'>
+                            $brand_title
                         </a>
-                    </li>
-                    <li class="nav-item ">
-                        <a href="" class="nav-link text-white">
-                            Brand2
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="" class="nav-link text-white">
-                            Brand3
-                        </a>
-                    </li>
-                    <li class="nav-item ">
-                        <a href="" class="nav-link text-white">
-                            Brand4
-                        </a>
-                    </li>
-                    <li class="nav-item ">
-                        <a href="" class="nav-link text-white">
-                            Brand5
-                        </a>
-                    </li>
+                    </li>";
+                    }
+                    ?>
+
                 </ul>
                 <!-- catagories to be displayed  -->
                 <ul class="navbar-nav me-auto text-center ">
@@ -209,31 +206,23 @@
                             <h4>Catagories</h4>
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a href="" class="nav-link text-white">
-                            Catagories1
+
+                    <?php
+                    $select_catagories = "Select * from catagorie";
+                    $result_catagories = mysqli_query($con, $select_catagories);
+                    // $row_data = mysqli_fetch_assoc($result_brands);
+                    // echo $row_data['brand_title'];
+                    while($row_data = mysqli_fetch_assoc($result_catagories)){
+                        $cat_title = $row_data['catagorie_title'];
+                        $cat_id = $row_data['catagorie_id'];
+                        echo "<li class='nav-item'>
+                        <a href='index.php?catagorie=$cat_id' class='nav-link text-white'>
+                            $cat_title
                         </a>
-                    </li>
-                    <li class="nav-item ">
-                        <a href="" class="nav-link text-white">
-                            Catagories2
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="" class="nav-link text-white">
-                            Catagories3
-                        </a>
-                    </li>
-                    <li class="nav-item ">
-                        <a href="" class="nav-link text-white">
-                            Catagories4
-                        </a>
-                    </li>
-                    <li class="nav-item ">
-                        <a href="" class="nav-link text-white">
-                            Catagories5
-                        </a>
-                    </li>
+                    </li>";
+                    }
+                    ?>
+
                 </ul>
             </div>
         </div>

@@ -60,6 +60,9 @@
                             class="btn btn-success rounded-button px-4 py-2">
                             Click Me!
                         </a></button>
+                    <button class="rounded-2 border-1"><a href="insert_product.php"
+                            class="btn btn-success rounded-button px-2 py-2">
+                            Insert Product</a></button>
                     <button class="rounded-2 border-1"><a href="" class="btn btn-success rounded-button px-2 py-2">
                             View Product</a></button>
                     <button class="rounded-2 border-1"><a href="index.php?insert_catagories"
@@ -85,7 +88,7 @@
         </div>
 
         <!-- fourth child  -->
-        <div class="container my-5">
+        <div class="container my-3">
             <?php 
             if(isset($_GET['insert_catagories'])){
                 include('insert_catagories.php');
