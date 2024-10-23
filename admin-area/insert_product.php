@@ -1,5 +1,45 @@
 <?php 
  include("../includes/connect.php");
+ if(isset($_POST['insert_product'])){
+    $product_title = $_POST['product_title'];
+    $product_description = $_POST['product_des'];
+    $product_keyword = $_POST['product_key'];
+    $product_catagories = $_POST['product_catagories'];
+    $product_brand = $_POST['product_brand'];
+    $product_price = $_POST['product_price'];
+    $product_status = 'true';
+    // accesing the images
+    $product_img1 = $_FILES['product_img1']['name'];
+    $product_img2 = $_FILES['product_img2']['name'];
+    $product_img3 = $_FILES['product_img3']['name'];
+
+    // accesing image tmp name 
+    $tmp_img1 = $_FILES['product_img1']['tmp_name'];
+    $tmp_img2 = $_FILES['product_img2']['tmp_name'];
+    $tmp_img3 = $_FILES['product_img3']['tmp_name'];
+
+    // checking empty condition 
+    if($product_title=='' or $product_description== '' or $product_keyword== '' or $product_catagories== '' or $product_brand== '' or $product_price=='' or $tmp_img1== '' or $tmp_img2=='' or $tmp_img3=='' ){
+        echo "<script>alert(' please fill all the available field ')</script>";
+        exit();
+    }else{
+        move_uploaded_file($tmp_img1,"./product_images/$product_img1");
+        move_uploaded_file($tmp_img2,"./product_images/$product_img2");
+        move_uploaded_file($tmp_img3,"./product_images/$product_img3");
+
+        // insert query 
+        $insert_product = "INSERT INTO `products` (product_title, product_description, product_keyword, catagorie_id, brand_id, product_image1, product_image2, product_image3, product_price, date, status) 
+        VALUES ('$product_title', '$product_description', '$product_keyword', '$product_catagories', '$product_brand', '$product_img1', '$product_img2', '$product_img3', '$product_price', NOW(), '$product_status')";
+        
+        $result_query = mysqli_query($con, $insert_product);
+        if ($result_query) {
+            echo "<script>alert('The product was inserted successfully')</script>";
+        } else {
+            echo "<script>alert('Error: " . mysqli_error($con) . "')</script>"; // This will show any SQL error
+        }
+    }
+ 
+ }
  ?>
 
 <!DOCTYPE html>
@@ -36,7 +76,7 @@
             </div>
             <!-- description  -->
             <div class="form-outline mb-4 w-50 m-auto">
-                <label for="product_title" class="form-label">Product Description</label>
+                <label for="product_des" class="form-label">Product Description</label>
                 <input type="text" name="product_des" id="product_des" class="form-control" autocomplete="off"
                     placeholder="Enter Product Description" required>
             </div>
