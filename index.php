@@ -91,87 +91,40 @@
             <div class="col-md-10">
                 <!-- products  -->
                 <div class="row">
-                    <div class="col-md-4 mb-2">
-                        <div class="card">
-                            <img src="./assets/erphone.jpg" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <p class="card-text">Some quick example text to build on the card title and make up the
-                                    bulk
-                                    of the card's content.</p>
-                                <a href="#" class="btn btn-success">Add to Cart</a>
-                                <a href="#" class="btn btn-secondary">View More</a>
+                    <!-- fetching phroducts  -->
+                    <?php 
+                    $select_products = "Select * from `products` order by rand() limit 0,9";
+                    $result_select = mysqli_query($con,$select_products);
+                  
+                   while($row= mysqli_fetch_assoc($result_select)){
+                    $product_id = $row['product_id'];
+                    $product_title = $row['product_title'];
+                    $product_decscription = $row['product_description'];
+                    $product_key = $row['product_keyword'];
+                    $product_image1 = $row['product_image1'];
+                    $product_price = $row['product_price'];
+                    $catagorie_id = $row['catagorie_id'];
+                    $brand_id = $row['brand_id'];
+                    $product_id = $row['product_id'];
+                    echo "
+                    <div class='col-md-4 mb-2'>
+                        <div class='card'>
+                            <img src='./admin-area/product_images/$product_image1' class='card-img-top' alt='$product_title'>
+                            <div class='card-body'>
+                                <h5 class='card-title'>$product_title</h5>
+                                <p class='card-text'>$product_decscription</p>
+                                <a href='#' class='btn btn-success'>Add to Cart</a>
+                                <a href='#' class='btn btn-secondary'>View More</a>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-4 mb-2">
-                        <div class="card">
-                            <img src="./assets/shose.jpg" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <p class="card-text">Some quick example text to build on the card title and make up the
-                                    bulk
-                                    of the card's content.</p>
-                                <a href="#" class="btn btn-success">Add to Cart</a>
-                                <a href="#" class="btn btn-secondary">View More</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 mb-2">
-                        <div class="card">
-                            <img src="./assets/jacket.jpg" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <p class="card-text">Some quick example text to build on the card title and make up the
-                                    bulk
-                                    of the card's content.</p>
-                                <a href="#" class="btn btn-success">Add to Cart</a>
-                                <a href="#" class="btn btn-secondary">View More</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-4 mb-2">
-                        <div class="card">
-                            <img src="./assets/apple fruite.jpg" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <p class="card-text">Some quick example text to build on the card title and make up the
-                                    bulk
-                                    of the card's content.</p>
-                                <a href="#" class="btn btn-success">Add to Cart</a>
-                                <a href="#" class="btn btn-secondary">View More</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 mb-2">
-                        <div class="card">
-                            <img src="./assets/shose.jpg" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <p class="card-text">Some quick example text to build on the card title and make up the
-                                    bulk
-                                    of the card's content.</p>
-                                <a href="#" class="btn btn-success">Add to Cart</a>
-                                <a href="#" class="btn btn-secondary">View More</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 mb-2">
-                        <div class="card">
-                            <img src="./assets/iphone.jpg" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <p class="card-text">Some quick example text to build on the card title and make up the
-                                    bulk
-                                    of the card's content.</p>
-                                <a href="#" class="btn btn-success">Add to Cart</a>
-                                <a href="#" class="btn btn-secondary">View More</a>
-                            </div>
-                        </div>
-                    </div>
+                    ";
+                   }
+                    ?>
+                  
+                    <!-- row end   -->
                 </div>
-
+                    <!-- col end  -->
             </div>
             <div class="col-md-2 bg-secondary p-0">
                 <!-- brands to be displayed  -->
@@ -185,8 +138,7 @@
                     <?php
                     $select_brand = "Select * from brands";
                     $result_brands = mysqli_query($con, $select_brand);
-                    // $row_data = mysqli_fetch_assoc($result_brands);
-                    // echo $row_data['brand_title'];
+                   
                     while($row_data = mysqli_fetch_assoc($result_brands)){
                         $brand_title = $row_data['brand_title'];
                         $brand_id = $row_data['brand_id'];
@@ -210,8 +162,7 @@
                     <?php
                     $select_catagories = "Select * from catagorie";
                     $result_catagories = mysqli_query($con, $select_catagories);
-                    // $row_data = mysqli_fetch_assoc($result_brands);
-                    // echo $row_data['brand_title'];
+                    
                     while($row_data = mysqli_fetch_assoc($result_catagories)){
                         $cat_title = $row_data['catagorie_title'];
                         $cat_id = $row_data['catagorie_id'];
