@@ -99,9 +99,9 @@
         </div>
 
         <!-- last child  -->
-        <div class="bg-secondary p-3 text-center ">
-            <p>All right reserved ©- Designed by Abyalew 2024</p>
-        </div>
+        <?php 
+        include("../includes/footer.php");
+        ?>
     </div>
     <!-- bootstrap script link  -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"

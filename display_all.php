@@ -97,7 +97,7 @@
                 <div class="row">
                     <!-- fetching phroducts  -->
                     <?php 
-               getProduct();
+               getAllProduct();
                getUniqeCatagories();
                getUniqeBrand ();
 
@@ -138,6 +138,8 @@
                 </ul>
             </div>
         </div>
+        <!-- last child  -->
+        <!-- include footer  -->
         <!-- last child  -->
         <?php
        include("./includes/footer.php");
