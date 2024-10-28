@@ -29,7 +29,7 @@ function getProduct(){
             <div class='card-body'>
                 <h5 class='card-title'>$product_title</h5>
                 <p class='card-text'>$product_decscription</p>
-                <a href='#' class='btn btn-success'>Add to Cart</a>
+                 <a href='index.php?add_to_cart=$product_id' class='btn btn-success'>Add to Cart</a>
                 <a href='product_details.php?product_id=$product_id' class='btn btn-secondary'>View More</a>
             </div>
         </div>
@@ -70,7 +70,7 @@ function getUniqeCatagories (){
             <div class='card-body'>
                 <h5 class='card-title'>$product_title</h5>
                 <p class='card-text'>$product_decscription</p>
-                <a href='#' class='btn btn-success'>Add to Cart</a>
+                <a href='index.php?add_to_cart=$product_id' class='btn btn-success'>Add to Cart</a>
                <a href='product_details.php?product_id=$product_id' class='btn btn-secondary'>View More</a>
             </div>
         </div>
@@ -111,7 +111,7 @@ function getUniqeBrand (){
             <div class='card-body'>
                 <h5 class='card-title'>$product_title</h5>
                 <p class='card-text'>$product_decscription</p>
-                <a href='#' class='btn btn-success'>Add to Cart</a>
+                 <a href='index.php?add_to_cart=$product_id' class='btn btn-success'>Add to Cart</a>
                 <a href='product_details.php?product_id=$product_id' class='btn btn-secondary'>View More</a>
             </div>
         </div>
@@ -185,7 +185,7 @@ function search_result(){
             <div class='card-body'>
                 <h5 class='card-title'>$product_title</h5>
                 <p class='card-text'>$product_decscription</p>
-                <a href='#' class='btn btn-success'>Add to Cart</a>
+                <a href='index.php?add_to_cart=$product_id' class='btn btn-success'>Add to Cart</a>
                 <a href='product_details.php?product_id=$product_id' class='btn btn-secondary'>View More</a>
             </div>
         </div>
@@ -223,7 +223,7 @@ function getAllProduct(){
             <div class='card-body'>
                 <h5 class='card-title'>$product_title</h5>
                 <p class='card-text'>$product_decscription</p>
-                <a href='#' class='btn btn-success'>Add to Cart</a>
+                 <a href='index.php?add_to_cart=$product_id' class='btn btn-success'>Add to Cart</a>
                 <a href='product_details.php?product_id=$product_id' class='btn btn-secondary'>View More</a>
             </div>
         </div>
@@ -263,7 +263,7 @@ function detailProducts(){
             <div class='card-body'>
                 <h5 class='card-title'>$product_title</h5>
                 <p class='card-text'>$product_decscription</p>
-                <a href='#' class='btn btn-success'>Add to Cart</a>
+                <a href='index.php?add_to_cart=$product_id' class='btn btn-success'>Add to Cart</a>
                 <a href='index.php' class='btn btn-secondary'>Go Home</a>
             </div>
         </div> 
@@ -303,4 +303,37 @@ function getUserIpAddr(){
 }
 
 // echo 'User Real IP - '.getUserIpAddr();
+
+
+// cart function 
+function cart() {
+    if (isset($_GET['add_to_cart'])) {
+        global $con;
+        $get_product_id = $_GET['add_to_cart'];
+
+        $get_ip_address = getUserIpAddr();
+        $select_query = "SELECT * FROM `card_details` WHERE ip_address='$get_ip_address' AND product_id='$get_product_id'";
+        
+        // Check the query result
+        $result = mysqli_query($con, $select_query);
+        if (!$result) {
+            die("Database query failed: " . mysqli_error($con));
+        }
+
+        $num_of_row = mysqli_num_rows($result);
+        if ($num_of_row > 0) {
+            echo "<script>alert('This item is already added to the cart');</script>";
+            echo "<script>window.open('index.php', '_self');</script>";
+        } else {
+            $insert_query = "INSERT INTO `card_details` (product_id, ip_address, quantity) VALUES ('$get_product_id', '$get_ip_address', 0)";
+            $result = mysqli_query($con, $insert_query);
+            if (!$result) {
+                die("Database insert failed: " . mysqli_error($con));
+            }
+            echo "<script>alert('The item is added to the cart');</script>";
+            echo "<script>window.open('index.php', '_self');</script>";
+        }
+    }
+}
+
 ?>

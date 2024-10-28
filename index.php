@@ -96,13 +96,14 @@
                 <!-- products  -->
                 <div class="row">
                     <!-- fetching phroducts  -->
-                    <?php 
+                    <?php
+                    cart();
                getProduct();
                getUniqeCatagories();
                getUniqeBrand ();
-               getUserIpAddr();
-               echo 'User Real IP - '.getUserIpAddr();
-                    ?>
+            //    getUserIpAddr();
+            //    echo 'User Real IP - '.getUserIpAddr();
+            //         ?>
 
                     <!-- row end   -->
                 </div>
