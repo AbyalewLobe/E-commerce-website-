@@ -51,15 +51,17 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#"><i class="fa fa-shopping-cart" aria-hidden="true"></i>
-                                <sup>1</sup> </a>
+                                <sup><?php cartItems(); ?></sup> </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">Total Price:100/-</a>
                         </li>
                     </ul>
                     <form class="d-flex" role="search" action="" method="get">
-                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="search_data">
-                         <input type="submit" value="Search" name="search_data_product" class="btn btn-outline-success  text-white border-secondary ">
+                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"
+                            name="search_data">
+                        <input type="submit" value="Search" name="search_data_product"
+                            class="btn btn-outline-success  text-white border-secondary ">
                     </form>
                 </div>
             </div>
@@ -78,7 +80,9 @@
             </ul>
         </nav>
 
-
+        <?php 
+cart();
+?>
         <!-- third child  -->
         <div class="bg-light">
             <h3 class="text-center">Hidden Store</h3>
@@ -99,10 +103,10 @@
                getUniqeBrand ();
 
                     ?>
-                  
+
                     <!-- row end   -->
                 </div>
-                    <!-- col end  -->
+                <!-- col end  -->
             </div>
             <div class="col-md-2 bg-secondary p-0">
                 <!-- brands to be displayed  -->
