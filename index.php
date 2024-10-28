@@ -100,7 +100,8 @@
                getProduct();
                getUniqeCatagories();
                getUniqeBrand ();
-
+               getUserIpAddr();
+               echo 'User Real IP - '.getUserIpAddr();
                     ?>
 
                     <!-- row end   -->
