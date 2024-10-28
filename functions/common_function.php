@@ -30,7 +30,7 @@ function getProduct(){
                 <h5 class='card-title'>$product_title</h5>
                 <p class='card-text'>$product_decscription</p>
                 <a href='#' class='btn btn-success'>Add to Cart</a>
-                <a href='#' class='btn btn-secondary'>View More</a>
+                <a href='product_details.php?product_id=$product_id' class='btn btn-secondary'>View More</a>
             </div>
         </div>
     </div>
@@ -71,7 +71,7 @@ function getUniqeCatagories (){
                 <h5 class='card-title'>$product_title</h5>
                 <p class='card-text'>$product_decscription</p>
                 <a href='#' class='btn btn-success'>Add to Cart</a>
-                <a href='#' class='btn btn-secondary'>View More</a>
+               <a href='product_details.php?product_id=$product_id' class='btn btn-secondary'>View More</a>
             </div>
         </div>
     </div>
@@ -112,7 +112,7 @@ function getUniqeBrand (){
                 <h5 class='card-title'>$product_title</h5>
                 <p class='card-text'>$product_decscription</p>
                 <a href='#' class='btn btn-success'>Add to Cart</a>
-                <a href='#' class='btn btn-secondary'>View More</a>
+                <a href='product_details.php?product_id=$product_id' class='btn btn-secondary'>View More</a>
             </div>
         </div>
     </div>
@@ -186,7 +186,7 @@ function search_result(){
                 <h5 class='card-title'>$product_title</h5>
                 <p class='card-text'>$product_decscription</p>
                 <a href='#' class='btn btn-success'>Add to Cart</a>
-                <a href='#' class='btn btn-secondary'>View More</a>
+                <a href='product_details.php?product_id=$product_id' class='btn btn-secondary'>View More</a>
             </div>
         </div>
     </div>
@@ -224,12 +224,67 @@ function getAllProduct(){
                 <h5 class='card-title'>$product_title</h5>
                 <p class='card-text'>$product_decscription</p>
                 <a href='#' class='btn btn-success'>Add to Cart</a>
-                <a href='#' class='btn btn-secondary'>View More</a>
+                <a href='product_details.php?product_id=$product_id' class='btn btn-secondary'>View More</a>
             </div>
         </div>
     </div>
     ";
     }
+}
+}
+}
+
+// view details function 
+function detailProducts(){
+    global $con;
+    if(isset(($_GET['product_id']))){
+    if(!isset($_GET['catagorie'])){
+        if(!isset($_GET['brand'])){
+            $product_id=$_GET['product_id'];
+            $select_products = "SELECT * FROM `products` WHERE product_id = $product_id ORDER BY RAND()";
+    $result_select = mysqli_query($con,$select_products);
+    
+    while($row= mysqli_fetch_assoc($result_select)){
+    $product_id = $row['product_id'];
+    $product_title = $row['product_title'];
+    $product_decscription = $row['product_description'];
+    $product_key = $row['product_keyword'];
+    $product_image1 = $row['product_image1'];
+    $product_image2 = $row['product_image2'];
+    $product_image3 = $row['product_image3'];
+    $product_price = $row['product_price'];
+    $catagorie_id = $row['catagorie_id'];
+    $brand_id = $row['brand_id'];
+    $product_id = $row['product_id'];
+    echo "
+    <div class='col-md-4 mb-2'>
+        <div class='card'>
+            <img src='./admin-area/product_images/$product_image1' class='card-img-top' alt='$product_title'>
+            <div class='card-body'>
+                <h5 class='card-title'>$product_title</h5>
+                <p class='card-text'>$product_decscription</p>
+                <a href='#' class='btn btn-success'>Add to Cart</a>
+                <a href='index.php' class='btn btn-secondary'>Go Home</a>
+            </div>
+        </div> 
+    </div>
+    <div class='col md-8'> 
+                  
+                        <div class='row'>
+                            <div class='col-md-12'>
+                                <h4 class='text-center text-success mb-5'>Related Products</h4>
+                            </div>
+                            <div class='col-md-6'>
+                            <img src='./admin-area/product_images/$product_image2' class='card-img-top' alt='$product_title'>
+                            </div>
+                            <div class='col-md-6'>
+                            <img src='./admin-area/product_images/$product_image3' class='card-img-top' alt='$product_title'>
+                            </div>
+                        </div>
+                     </div>
+    ";
+    }
+}
 }
 }
 }
