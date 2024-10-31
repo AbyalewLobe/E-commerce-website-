@@ -29,6 +29,7 @@ function getProduct(){
             <div class='card-body'>
                 <h5 class='card-title'>$product_title</h5>
                 <p class='card-text'>$product_decscription</p>
+                <p class='card-text'>price: $product_price /-</p>
                  <a href='index.php?add_to_cart=$product_id' class='btn btn-success'>Add to Cart</a>
                 <a href='product_details.php?product_id=$product_id' class='btn btn-secondary'>View More</a>
             </div>
@@ -70,6 +71,7 @@ function getUniqeCatagories (){
             <div class='card-body'>
                 <h5 class='card-title'>$product_title</h5>
                 <p class='card-text'>$product_decscription</p>
+                <p class='card-text'>price: $product_price /-</p>
                 <a href='index.php?add_to_cart=$product_id' class='btn btn-success'>Add to Cart</a>
                <a href='product_details.php?product_id=$product_id' class='btn btn-secondary'>View More</a>
             </div>
@@ -111,6 +113,7 @@ function getUniqeBrand (){
             <div class='card-body'>
                 <h5 class='card-title'>$product_title</h5>
                 <p class='card-text'>$product_decscription</p>
+                <p class='card-text'>price: $product_price /-</p>
                  <a href='index.php?add_to_cart=$product_id' class='btn btn-success'>Add to Cart</a>
                 <a href='product_details.php?product_id=$product_id' class='btn btn-secondary'>View More</a>
             </div>
@@ -185,6 +188,7 @@ function search_result(){
             <div class='card-body'>
                 <h5 class='card-title'>$product_title</h5>
                 <p class='card-text'>$product_decscription</p>
+                 <p class='card-text'>price: $product_price /-</p>
                 <a href='index.php?add_to_cart=$product_id' class='btn btn-success'>Add to Cart</a>
                 <a href='product_details.php?product_id=$product_id' class='btn btn-secondary'>View More</a>
             </div>
@@ -223,6 +227,7 @@ function getAllProduct(){
             <div class='card-body'>
                 <h5 class='card-title'>$product_title</h5>
                 <p class='card-text'>$product_decscription</p>
+                 <p class='card-text'>price: $product_price /-</p>
                  <a href='index.php?add_to_cart=$product_id' class='btn btn-success'>Add to Cart</a>
                 <a href='product_details.php?product_id=$product_id' class='btn btn-secondary'>View More</a>
             </div>
@@ -263,6 +268,7 @@ function detailProducts(){
             <div class='card-body'>
                 <h5 class='card-title'>$product_title</h5>
                 <p class='card-text'>$product_decscription</p>
+                <p class='card-text'>price: $product_price /-</p>
                 <a href='index.php?add_to_cart=$product_id' class='btn btn-success'>Add to Cart</a>
                 <a href='index.php' class='btn btn-secondary'>Go Home</a>
             </div>
@@ -341,7 +347,7 @@ function cartItems()
     if (isset($_GET['add_to_cart'])) {
         global $con;
         $get_ip_address = getUserIpAddr();
-        $select_query = "SELECT * FROM `card_details` WHERE ip_address='$get_ip_address' ";
+        $select_query = "SELECT * FROM ` ` WHERE ip_address='$get_ip_address' ";
 
         // Check the query result
         $result = mysqli_query($con, $select_query);
@@ -361,4 +367,42 @@ function cartItems()
     }
     echo $count_items;
 }
+// display total price s
+function total_price() {
+    global $con;
+    $get_ip_address = getUserIpAddr();
+    $total_price = 0;
+
+    // Ensure to use quotes around $get_ip_address in the SQL query
+    $select_product = "SELECT * FROM `card_details` WHERE ip_address = '$get_ip_address'";
+    $product_result = mysqli_query($con, $select_product);
+
+    // Check if the query was successful
+    if (!$product_result) {
+        die("Query Failed: " . mysqli_error($con));
+    }
+
+    while ($row = mysqli_fetch_array($product_result)) {
+        $product_id = $row['product_id'];
+
+        // Ensure to use quotes around $product_id in the SQL query
+        $select_products = "SELECT * FROM `products` WHERE product_id = '$product_id'";
+        $product_id_result = mysqli_query($con, $select_products);
+
+        // Check if the query was successful
+        if (!$product_id_result) {
+            die("Query Failed: " . mysqli_error($con));
+        }
+
+        while ($row_id = mysqli_fetch_array($product_id_result)) {
+            $product_price = $row_id['product_price'];
+            $total_price += $product_price; // Correctly adding product price to total
+        }
+    }
+
+    echo $total_price; // Output the total price
+}
+
+   
+
 ?>

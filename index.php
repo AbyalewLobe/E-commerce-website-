@@ -54,7 +54,7 @@
                                 <sup><?php cartItems(); ?></sup> </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Total Price:100/-</a>
+                            <a class="nav-link" href="#">Total Price:<?php total_price(); ?>/-</a>
                         </li>
                     </ul>
                     <form class="d-flex" role="search" action="search_product.php" method="get">
@@ -97,6 +97,7 @@
                 <div class="row">
                     <!-- fetching phroducts  -->
                     <?php
+                    
                     cart();
                getProduct();
                getUniqeCatagories();
