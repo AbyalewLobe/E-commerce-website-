@@ -53,17 +53,9 @@
                             <a class="nav-link" href="cart.php"><i class="fa fa-shopping-cart" aria-hidden="true"></i>
                                 <sup><?php cartItems(); ?></sup> </a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Total Price:<?php total_price(); ?>/-</a>
-                        </li>
+                       
                     </ul>
-                    <form class="d-flex" role="search" action="search_product.php" method="get">
-                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"
-                            name="search_data">
-
-                        <input type="submit" value="Search" name="search_data_product"
-                            class="btn btn-outline-success  text-white border-secondary ">
-                    </form>
+                  
                 </div>
             </div>
         </nav>
@@ -88,59 +80,44 @@
             <p class="text-center">Communication is at the heart of e-commerse and community</p>
         </div>
 
-
         <!-- fourth child  -->
-
-        <div class="row">
-            <div class="col-md-10">
-                <!-- products  -->
-                <div class="row">
-                    <!-- fetching phroducts  -->
-                    <?php
-                    
-                    cart();
-               getProduct();
-               getUniqeCatagories();
-               getUniqeBrand ();
-            //    getUserIpAddr();
-            //    echo 'User Real IP - '.getUserIpAddr();
-            //         ?>
-
-                    <!-- row end   -->
-                </div>
-                <!-- col end  -->
+         <div class="container">
+            <div class="row">
+                <table class="table table-bordered text-center">
+        <thead>
+            <th>Product Title</th>
+            <th>Product Image</th>
+            <th>Product Title</th>
+            <th>Product Image</th>
+            <th>Quantity</th>
+            <th>Total Price</th>
+            <th>Remove</th>
+            <th>Operations</th>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Aple</td>
+                <td><img src="./assets/apple fruite.jpg" class='card-img-top' alt=""></td>
+                <td><input type="text" name='' id=''></td>
+                <td>9000</td>
+                <td><input type="checkbox"></td>
+                <td>
+                    <p>Update</p>
+                    <p>Remove</p>
+                </td>
+            </tr>
+        </tbody>
+                </table>
+                <!-- subtotal  -->
+                 <div class="d-flex mb-5">
+                    <h4 class='px-3'>Subtotal:<strong class='text-success'><?php total_price(); ?></strong</h4>
+                    <a href="index.php" class=''><button class='bg-success rounded  mx-3 px-3 py-2 border-0 '>Continue Shoping</button></a>
+                    <a href="index.php" class=''><button class='bg-secondary px-3 rounded py-2 border-0 '>checkout</button></a>
+                 </div>
             </div>
-            <div class="col-md-2 bg-secondary p-0">
-                <!-- brands to be displayed  -->
-                <ul class="navbar-nav me-auto text-center ">
-                    <li class="nav-item bg-success">
-                        <a href="" class="nav-link text-white">
-                            <h4>Delivery</h4>
-                        </a>
-                    </li>
+         </div>
 
-                    <?php
-                   
-                    displayBrand();
-                    ?>
-
-                </ul>
-                <!-- catagories to be displayed  -->
-                <ul class="navbar-nav me-auto text-center ">
-                    <li class="nav-item bg-success">
-                        <a href="" class="nav-link text-white">
-                            <h4>Catagories</h4>
-                        </a>
-                    </li>
-
-                    <?php
-                 
-                    displayCatagorie();
-                    ?>
-
-                </ul>
-            </div>
-        </div>
+        
         <!-- last child  -->
         <?php
        include("./includes/footer.php");
