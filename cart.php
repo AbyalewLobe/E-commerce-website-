@@ -21,6 +21,14 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
         integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <style>
+        .crat_img{
+            width: 80px;
+            height: 80px;
+            object-fit:contain;
+        }
+    </style>
 </head>
 
 <body>
@@ -87,26 +95,61 @@
         <thead>
             <th>Product Title</th>
             <th>Product Image</th>
-            <th>Product Title</th>
-            <th>Product Image</th>
             <th>Quantity</th>
             <th>Total Price</th>
             <th>Remove</th>
             <th>Operations</th>
         </thead>
         <tbody>
+             <!-- php code to display cart product  -->
+         <?php 
+         global $con;
+         $get_ip_address = getUserIpAddr();
+         $total_price = 0;
+     
+        
+         $select_product = "SELECT * FROM `card_details` WHERE ip_address = '$get_ip_address'";
+         $product_result = mysqli_query($con, $select_product);
+     
+         if (!$product_result) {
+             die("Query Failed: " . mysqli_error($con));
+         }
+     
+         while ($row = mysqli_fetch_array($product_result)) {
+             $product_id = $row['product_id'];
+     
+            
+             $select_products = "SELECT * FROM `products` WHERE product_id = '$product_id'";
+             $product_id_result = mysqli_query($con, $select_products);
+     
+        
+             if (!$product_id_result) {
+                 die("Query Failed: " .mysqli_error($con));
+             }
+     
+             while ($row_id = mysqli_fetch_array($product_id_result)) {
+                 $product_price = $row_id['product_price'];
+                 $product_title=$row_id['product_title'];
+                 $product_image1=$row_id['product_image1'];
+                 $total_price += $product_price; 
+        
+         ?>
             <tr>
-                <td>Aple</td>
-                <td><img src="./assets/apple fruite.jpg" class='card-img-top' alt=""></td>
-                <td><input type="text" name='' id=''></td>
-                <td>9000</td>
+                <td><?php echo $product_title ?></td>
+                <td><img class='crat_img' src="./admin-area/product_images/<?php echo  $product_image1 ?>" class='card-img-top' alt=""></td>
+                <td><input type="text" name='' id='' class='form-input w-50'></td>
+                <td><?php echo $product_price ?></td>
                 <td><input type="checkbox"></td>
                 <td>
-                    <p>Update</p>
-                    <p>Remove</p>
+                    <button class='bg-success rounded  mx-3 px-3 py-2 border-0 '>Update</button>
+                    <button class='bg-success rounded  mx-3 px-3 py-2 border-0 '>Remove</button>
                 </td>
             </tr>
+      <?php  }
+    }?>
         </tbody>
+
+       
                 </table>
                 <!-- subtotal  -->
                  <div class="d-flex mb-5">
